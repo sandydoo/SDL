@@ -46,7 +46,11 @@ while test $# -gt 0; do
       echo @SDL_VERSION@
       ;;
     --cflags)
-      echo -I@includedir@/SDL2 @SDL_CFLAGS@
+      SDL_CFLAGS=""
+      for i in @includedir@/SDL2 $SDL2_PATH; do
+        SDL_CFLAGS="$SDL_CFLAGS -I$i"
+      done
+      echo $SDL_CFLAGS @SDL_CFLAGS@
       ;;
 @ENABLE_SHARED_TRUE@    --libs)
 @ENABLE_SHARED_TRUE@      echo -L@libdir@ @SDL_RLD_FLAGS@ @SDL_LIBS@
